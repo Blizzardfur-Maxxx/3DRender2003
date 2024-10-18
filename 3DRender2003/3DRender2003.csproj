@@ -79,6 +79,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="PyramidRenderer.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="ShapeRenderer.cs" />
     <Compile Include="SphereRenderer.cs" />

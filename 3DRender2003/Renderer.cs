@@ -12,6 +12,7 @@ namespace _DRender2003
         public LineRenderer lineRenderer;
         private CubeRenderer cubeRenderer;
         private SphereRenderer sphereRenderer;
+        private PyramidRenderer pyramidRenderer;
         public bool fillShapes = true;
 
         private Camera camera;
@@ -23,6 +24,7 @@ namespace _DRender2003
             lineRenderer = new LineRenderer(this);
             camera = new Camera(new Vector3(0, 0, -5), new Vector3(0, 0, 0), 1.0f);
             cubeRenderer = new CubeRenderer(this, camera);
+            pyramidRenderer = new PyramidRenderer(this, camera);
             sphereRenderer = new SphereRenderer(this, camera, 8, 8);
 
         }
@@ -68,7 +70,7 @@ namespace _DRender2003
                 //RenderSphere(g);
 
                 //The method to render the cube
-                RenderCube(g);
+                RenderPyramid(g);
             }
         }
 
@@ -85,9 +87,23 @@ namespace _DRender2003
                 Color.Cyan,  // Top face
                 Color.Magenta // Bottom face
             };
+        }
+
+        public void RenderPyramid(Graphics g)
+        {
+            Vector3 pyramidCenter = new Vector3(120, 160, 0);
+            Color[] pyramidColors = new Color[] 
+            {
+                Color.Red,   // Front face
+                Color.Green, // Back face
+                Color.Blue,  // Left face
+                Color.Yellow,// Right face
+                Color.Cyan,  // Top face
+                Color.Magenta // Bottom face
+            };
 
             // Pass an array of colors to DrawCube
-            cubeRenderer.DrawShape(g, cubeCenter, 100, cubeColors, fillShapes);
+            pyramidRenderer.DrawShape(g, pyramidCenter, 100, pyramidColors, fillShapes);
         }
 
         public void RenderSphere(Graphics g)
