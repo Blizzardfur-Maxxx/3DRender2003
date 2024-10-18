@@ -37,16 +37,16 @@ namespace _DRender2003
             switch (key)
             {
                 case Keys.Up: // Move forward (in the Z direction)
-                    camera.Position += new Vector3(0, 0, moveSpeed); // Move forward in the Z direction
+                    camera.Position += new Vector3(0, 0, -moveSpeed); // Move forward in the Z direction
                     break;
                 case Keys.Down: // Move backward (in the Z direction)
-                    camera.Position += new Vector3(0, 0, -moveSpeed); // Move backward in the Z direction
+                    camera.Position += new Vector3(0, 0, moveSpeed); // Move backward in the Z direction
                     break;
                 case Keys.Left: // Move left
-                    camera.Position += new Vector3(-moveSpeed, 0, 0); // Move left in the X direction
+                    camera.Position += new Vector3(moveSpeed, 0, 0); // Move left in the X direction
                     break;
                 case Keys.Right: // Move right
-                    camera.Position += new Vector3(moveSpeed, 0, 0); // Move right in the X direction
+                    camera.Position += new Vector3(-moveSpeed, 0, 0); // Move right in the X direction
                     break;
             }
             Console.WriteLine("Camera Position: " + camera.Position.X + ", " + camera.Position.Y + ", " + camera.Position.Z);

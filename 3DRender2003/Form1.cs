@@ -16,10 +16,10 @@ namespace _DRender2003
         {
             InitializeComponent();
 
-            
+            // Initialize the renderer
             renderer = new Renderer();
 
-            
+            // Set up a timer to trigger the rendering loop
             renderTimer = new Timer();
             renderTimer.Interval = 1000 / 30; // ~30 FPS
             renderTimer.Tick += new EventHandler(OnRender);
