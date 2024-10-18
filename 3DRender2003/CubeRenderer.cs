@@ -1,0 +1,111 @@
+using System.Drawing;
+
+namespace _DRender2003
+{
+    public class CubeRenderer : ShapeRenderer
+    {
+        private Entity cubeEntity;
+
+        public CubeRenderer(Renderer renderer, Camera camera)
+            : base(renderer, camera)
+        {
+            // Initialize cube entity at a specific position and no rotation
+            cubeEntity = new Entity(new Vector3(120, 160, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+            depthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
+        }
+
+        public override void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes)
+        {
+            // Rotate the cube by a small amount (e.g., 1 degree) around the Y axis
+            cubeEntity.Rotate(new Vector3(0, 1, 0)); // Adjust this value for faster/slower rotation
+
+            // Apply rotation to vertices, centered around the entity's position
+            Vector3[] vertices = GetCubeVertices(size); // Get vertices relative to center
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                // First apply the rotation, then translate to the cube's position
+                vertices[i] = cubeEntity.ApplyRotation(vertices[i]) + cubeEntity.Position;
+            }
+
+            if (fillShapes)
+            {
+                DrawFilledCube(g, vertices, colors);
+            }
+            else
+            {
+                DrawCubeWireframe(g, vertices, Color.Pink); // Use first color for wireframe
+            }
+        }
+
+        private void DrawCubeWireframe(Graphics g, Vector3[] vertices, Color color)
+        {
+            // Apply perspective projection
+            Vector3[] projectedVertices = ProjectVertices(vertices);
+
+            // Draw the edges of the cube
+            DrawLine(g, projectedVertices[0], projectedVertices[1], color); // Front bottom
+            DrawLine(g, projectedVertices[1], projectedVertices[2], color); // Front right
+            DrawLine(g, projectedVertices[2], projectedVertices[3], color); // Front top
+            DrawLine(g, projectedVertices[3], projectedVertices[0], color); // Front left
+
+            DrawLine(g, projectedVertices[4], projectedVertices[5], color); // Back bottom
+            DrawLine(g, projectedVertices[5], projectedVertices[6], color); // Back right
+            DrawLine(g, projectedVertices[6], projectedVertices[7], color); // Back top
+            DrawLine(g, projectedVertices[7], projectedVertices[4], color); // Back left
+
+            DrawLine(g, projectedVertices[0], projectedVertices[4], color); // Left edges
+            DrawLine(g, projectedVertices[1], projectedVertices[5], color); // Right edges
+            DrawLine(g, projectedVertices[2], projectedVertices[6], color); // Top edges
+            DrawLine(g, projectedVertices[3], projectedVertices[7], color); // Bottom edges
+        }
+
+        private void DrawFilledCube(Graphics g, Vector3[] vertices, Color[] colors)
+        {
+            // Apply perspective projection
+            Vector3[] projectedVertices = ProjectVertices(vertices);
+
+            // Draw filled faces with specified colors
+            DrawFace(g, projectedVertices[0], projectedVertices[1], projectedVertices[2], projectedVertices[3], colors[0]); // Front
+            DrawFace(g, projectedVertices[4], projectedVertices[5], projectedVertices[6], projectedVertices[7], colors[1]); // Back
+            DrawFace(g, projectedVertices[0], projectedVertices[3], projectedVertices[7], projectedVertices[4], colors[2]); // Left
+            DrawFace(g, projectedVertices[1], projectedVertices[5], projectedVertices[6], projectedVertices[2], colors[3]); // Right
+            DrawFace(g, projectedVertices[3], projectedVertices[2], projectedVertices[6], projectedVertices[7], colors[4]); // Top
+            DrawFace(g, projectedVertices[0], projectedVertices[4], projectedVertices[5], projectedVertices[1], colors[5]); // Bottom
+
+            // Draw the edges of the filled cube (optional)
+            DrawCubeWireframe(g, vertices, Color.Black); // Optional: Draw wireframe over the filled cube
+        }
+
+        private Vector3[] GetCubeVertices(float size)
+        {
+            // Define the vertices centered around (0, 0, 0)
+            return new Vector3[] {
+                new Vector3(-size / 2, -size / 2, -size / 2), // Front bottom left
+                new Vector3(size / 2, -size / 2, -size / 2), // Front bottom right
+                new Vector3(size / 2, size / 2, -size / 2), // Front top right
+                new Vector3(-size / 2, size / 2, -size / 2), // Front top left
+                new Vector3(-size / 2, -size / 2, size / 2), // Back bottom left
+                new Vector3(size / 2, -size / 2, size / 2), // Back bottom right
+                new Vector3(size / 2, size / 2, size / 2), // Back top right
+                new Vector3(-size / 2, size / 2, size / 2)  // Back top left
+            };
+        }
+
+        private void DrawFace(Graphics g, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color color)
+        {
+            // Create points for the face
+            Point[] points = new Point[] {
+                new Point((int)v1.X, (int)v1.Y),
+                new Point((int)v2.X, (int)v2.Y),
+                new Point((int)v3.X, (int)v3.Y),
+                new Point((int)v4.X, (int)v4.Y),
+            };
+
+            // Fill the polygon
+            using (Brush brush = new SolidBrush(color))
+            {
+                g.FillPolygon(brush, points);
+            }
+        }
+    }
+}

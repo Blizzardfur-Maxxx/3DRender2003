@@ -1,0 +1,8 @@
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\_DRender2003.Properties.Resources.resources
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\3DRender2003.csproj.GenerateResource.Cache
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\bin\Debug\3DRender2003.exe
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\bin\Debug\3DRender2003.pdb
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\3DRender2003.exe
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\3DRender2003.pdb
+C:\Users\blizz\OneDrive\Desktop\Documents\Visual Studio 2005\Projects\3DRender2003\3DRender2003\obj\Debug\_DRender2003.Form1.resources
