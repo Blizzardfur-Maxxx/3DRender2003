@@ -26,17 +26,45 @@ namespace _DRender2003
             set { z = value; }
         }
 
-        public static Vector3 operator +(Vector3 a, Vector3 b)
-        {
-            return new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
-        }
-
         // Constructor to initialize the vector
         public Vector3(float x, float y, float z)
         {
             this.x = x;
             this.y = y;
             this.z = z;
+        }
+
+        // Vector addition
+        public static Vector3 operator +(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
+
+        // Vector subtraction
+        public static Vector3 operator -(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
+        }
+
+        public static Vector3 operator /(Vector3 a, float scalar)
+        {
+            return new Vector3(a.X / scalar, a.Y / scalar, a.Z / scalar);
+        }
+
+        // Cross product
+        public static Vector3 Cross(Vector3 a, Vector3 b)
+        {
+            return new Vector3(
+                a.Y * b.Z - a.Z * b.Y,
+                a.Z * b.X - a.X * b.Z,
+                a.X * b.Y - a.Y * b.X
+            );
+        }
+
+        // Dot product
+        public static float Dot(Vector3 a, Vector3 b)
+        {
+            return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
         }
     }
 }

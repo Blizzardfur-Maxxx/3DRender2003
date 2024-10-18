@@ -71,9 +71,6 @@ namespace _DRender2003
             DrawFace(g, projectedVertices[1], projectedVertices[5], projectedVertices[6], projectedVertices[2], colors[3]); // Right
             DrawFace(g, projectedVertices[3], projectedVertices[2], projectedVertices[6], projectedVertices[7], colors[4]); // Top
             DrawFace(g, projectedVertices[0], projectedVertices[4], projectedVertices[5], projectedVertices[1], colors[5]); // Bottom
-
-            // Draw the edges of the filled cube (optional)
-            DrawCubeWireframe(g, vertices, Color.Black); // Optional: Draw wireframe over the filled cube
         }
 
         private Vector3[] GetCubeVertices(float size)
