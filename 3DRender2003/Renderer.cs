@@ -14,6 +14,8 @@ namespace _DRender2003
         private SphereRenderer sphereRenderer;
         private PyramidRenderer pyramidRenderer;
         public bool fillShapes = true;
+        public enum RendererType { Cube, Sphere, Pyramid }
+        private RendererType currentRendererType = RendererType.Cube;
 
         private Camera camera;
 
@@ -27,6 +29,11 @@ namespace _DRender2003
             pyramidRenderer = new PyramidRenderer(this, camera);
             sphereRenderer = new SphereRenderer(this, camera, 8, 8);
 
+        }
+
+        public void SetRendererType(RendererType type)
+        {
+            currentRendererType = type;
         }
 
         // Public property to access the camera
@@ -66,11 +73,19 @@ namespace _DRender2003
 
                 cubeRenderer.ClearBackDepthBuffer();
 
-                // Render the sphere
-                //RenderSphere(g);
-
-                //The method to render the cube
-                RenderPyramid(g);
+                // Render based on the current renderer type
+                switch (currentRendererType)
+                {
+                    case RendererType.Cube:
+                        RenderCube(g);
+                        break;
+                    case RendererType.Sphere:
+                        RenderSphere(g);
+                        break;
+                    case RendererType.Pyramid:
+                        RenderPyramid(g);
+                        break;
+                }
             }
         }
 
@@ -87,6 +102,7 @@ namespace _DRender2003
                 Color.Cyan,  // Top face
                 Color.Magenta // Bottom face
             };
+            cubeRenderer.DrawShape(g, cubeCenter, 100, cubeColors, fillShapes);
         }
 
         public void RenderPyramid(Graphics g)
@@ -109,9 +125,17 @@ namespace _DRender2003
         public void RenderSphere(Graphics g)
         {
             Vector3 sphereCenter = new Vector3(120, 160, 0); // Define center of the sphere
-            Color sphereColor = Color.White; // Color for the sphere
+            Color[] sphereColors = new Color[] 
+            {
+                Color.Red,   // Front face
+                Color.Green, // Back face
+                Color.Blue,  // Left face
+                Color.Yellow,// Right face
+                Color.Cyan,  // Top face
+                Color.Magenta // Bottom face
+            };
 
-            sphereRenderer.DrawShape(g, sphereCenter, 100, new Color[] { sphereColor }, fillShapes); // Draw sphere
+            sphereRenderer.DrawShape(g, sphereCenter, 100, sphereColors, fillShapes); // Draw sphere
         }
     }
 }

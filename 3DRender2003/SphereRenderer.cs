@@ -43,7 +43,7 @@ namespace _DRender2003
             }
             else
             {
-                DrawSphereWireframe(g, vertices, Color.Pink);
+                DrawSphereWireframe(g, vertices, Color.Red);
             }
         }
 
