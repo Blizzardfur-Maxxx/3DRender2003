@@ -31,7 +31,6 @@ namespace _DRender2003
             return new Vector3(projectedX, projectedY, 0);
         }
 
-
         public Vector3 Position
         {
             get { return position; }

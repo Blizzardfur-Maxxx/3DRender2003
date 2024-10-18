@@ -28,8 +28,7 @@ namespace _DRender2003
                 }
             }
         }
-
-        
+ 
         public abstract void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes);
 
         // Method for drawing a pixel with depth checking
@@ -69,7 +68,6 @@ namespace _DRender2003
 
             renderer.lineRenderer.DrawLine(g, x1, y1, x2, y2, color);
         }
-
 
         protected void DrawFaceWithDepth(Graphics g, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color color)
         {
