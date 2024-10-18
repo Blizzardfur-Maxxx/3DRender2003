@@ -65,7 +65,7 @@ namespace _DRender2003
                 cubeRenderer.ClearBackDepthBuffer();
 
                 // Render the sphere
-                RenderSphere(g);
+                //RenderSphere(g);
 
                 //The method to render the cube
                 RenderCube(g);

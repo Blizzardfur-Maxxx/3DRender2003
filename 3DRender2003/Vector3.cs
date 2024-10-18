@@ -66,5 +66,11 @@ namespace _DRender2003
         {
             return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
         }
+
+        public Vector3 Normalize()
+        {
+            float length = (float)MathHelper.Sqrt(X * X + Y * Y + Z * Z);
+            return new Vector3(X / length, Y / length, Z / length);
+        }
     }
 }

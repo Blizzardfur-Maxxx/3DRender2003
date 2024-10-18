@@ -19,9 +19,19 @@ namespace _DRender2003
             return (float)Math.Cos(value);
         }
 
+        public static float Tan(float value)
+        {
+            return (float)Math.Tan(value);
+        }
+
         public static float ToRadians(float degrees)
         {
             return degrees * (float)Math.PI / 180f;
+        }
+
+        public static float Sqrt(float value)
+        {
+            return (float)Math.Sqrt(value); // Use Math.Sqrt and cast to float
         }
     }
 }

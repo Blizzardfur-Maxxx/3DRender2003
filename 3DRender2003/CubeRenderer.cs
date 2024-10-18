@@ -32,7 +32,7 @@ namespace _DRender2003
             }
             else
             {
-                DrawCubeWireframe(g, vertices, Color.Pink); // Use first color for wireframe
+                DrawCubeWireframe(g, vertices, Color.Red); // Use first color for wireframe
             }
         }
 
