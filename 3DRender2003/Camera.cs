@@ -17,6 +17,11 @@ namespace _DRender2003
 
         public Vector3 Project(Vector3 vertex)
         {
+            // Adjust the vertex position based on the camera position
+            vertex.X -= position.X;
+            vertex.Y -= position.Y;
+            vertex.Z -= position.Z;
+
             // Simple perspective projection logic
             float perspective = 400; // Focal length
             float projectedX = vertex.X * perspective / (perspective + vertex.Z);
@@ -25,6 +30,7 @@ namespace _DRender2003
             // Return projected coordinates
             return new Vector3(projectedX, projectedY, 0);
         }
+
 
         public Vector3 Position
         {

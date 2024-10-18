@@ -6,24 +6,25 @@ namespace _DRender2003
 {
     public partial class Form1 : Form
     {
-        private Renderer renderer;  // Instance of the Renderer class
-        private Timer renderTimer;  // Timer to control the rendering loop
+        private Renderer renderer;
+        private Timer renderTimer;  
         private System.Windows.Forms.Button toggleButton;
-        private int frameCount = 0;  // Frame count for FPS calculation
-        private DateTime lastUpdate = DateTime.Now;  // Last update time for FPS
+        private int frameCount = 0; 
+        private DateTime lastUpdate = DateTime.Now;
 
         public Form1()
         {
             InitializeComponent();
 
-            // Initialize the renderer
+            
             renderer = new Renderer();
 
-            // Set up a timer to trigger the rendering loop
+            
             renderTimer = new Timer();
             renderTimer.Interval = 1000 / 30; // ~30 FPS
             renderTimer.Tick += new EventHandler(OnRender);
             renderTimer.Enabled = true; // Start the timer
+            this.KeyPreview = true;
 
             // Setup toggle button
             this.toggleButton = new System.Windows.Forms.Button();
@@ -38,18 +39,18 @@ namespace _DRender2003
         // This method is called on each tick of the render timer
         private void OnRender(object sender, EventArgs e)
         {
-            renderer.RenderFrame(); // Render the next frame using the Renderer class
-            frameCount++; // Increment frame count
+            renderer.RenderFrame();
+            frameCount++;
 
-            // Update FPS every second
+            
             if ((DateTime.Now - lastUpdate).TotalSeconds >= 1)
             {
-                this.Text = "FPS: " + frameCount.ToString(); // Set the window title to show FPS
-                frameCount = 0; // Reset frame count
-                lastUpdate = DateTime.Now; // Reset last update time
+                this.Text = "FPS: " + frameCount.ToString();
+                frameCount = 0; //
+                lastUpdate = DateTime.Now;
             }
 
-            this.Invalidate(); // Force the form to repaint
+            this.Invalidate();
         }
 
         private void ToggleButton_Click(object sender, EventArgs e)
@@ -60,18 +61,26 @@ namespace _DRender2003
         // Override the OnPaint method to draw the framebuffer onto the form
         protected override void OnPaint(PaintEventArgs e)
         {
-            // Draw the entire frame buffer to the screen from the renderer
+
             e.Graphics.DrawImage(renderer.framebuffer, 0, 0);
 
             // Create a basic font and draw the FPS text
-            // Use default system font as a fallback
-            Font font = new Font("Arial", 10, FontStyle.Regular); // Use whatever parameters are available
-            SolidBrush blackBrush = new SolidBrush(Color.Black); // Use SolidBrush instead of Brushes
-
-            // Ensure to use a RectangleF for positioning
-            e.Graphics.DrawString("FPS: " + frameCount.ToString(), font, blackBrush, 10, 10);
+            Font font = new Font("Arial", 10, FontStyle.Regular);
+            SolidBrush blackBrush = new SolidBrush(Color.Black);
+            e.Graphics.DrawString("FPS: " + frameCount.ToString(), font, blackBrush, 10, 10); //FPS Count!!!
 
             base.OnPaint(e);
         }
+
+        // Handle key presses to control the camera
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            // Call the MoveCamera method in the renderer
+            renderer.MoveCamera(e.KeyCode);
+            this.Invalidate(); // Request to repaint the form
+        }
+
     }
 }

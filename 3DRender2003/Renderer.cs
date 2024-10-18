@@ -1,4 +1,6 @@
 using System.Drawing;
+using System.Windows.Forms;
+using System; // Make sure to include this for Keys enum
 
 namespace _DRender2003
 {
@@ -22,6 +24,34 @@ namespace _DRender2003
             cubeRenderer = new CubeRenderer(this, camera);
         }
 
+        // Public property to access the camera
+        public Camera Camera
+        {
+            get { return camera; }
+        }
+
+        // Method to move the camera based on user input
+        public void MoveCamera(Keys key)
+        {
+            const float moveSpeed = 20f; // Adjust the speed as necessary
+            switch (key)
+            {
+                case Keys.W: // Move forward (in the Z direction)
+                    camera.Position += new Vector3(0, 0, moveSpeed); // Move forward in the Z direction
+                    break;
+                case Keys.S: // Move backward (in the Z direction)
+                    camera.Position += new Vector3(0, 0, -moveSpeed); // Move backward in the Z direction
+                    break;
+                case Keys.A: // Move left
+                    camera.Position += new Vector3(-moveSpeed, 0, 0); // Move left in the X direction
+                    break;
+                case Keys.D: // Move right
+                    camera.Position += new Vector3(moveSpeed, 0, 0); // Move right in the X direction
+                    break;
+            }
+            Console.WriteLine("Camera Position: " + camera.Position.X + ", " + camera.Position.Y + ", " + camera.Position.Z);
+        }
+
         // Method to render the frame
         public void RenderFrame()
         {
@@ -40,7 +70,7 @@ namespace _DRender2003
         public void RenderCube(Graphics g)
         {
             Vector3 cubeCenter = new Vector3(120, 160, 0);
-            Color[] cubeColors = new Color[]
+            Color[] cubeColors = new Color[] 
             {
                 Color.Red,   // Front face
                 Color.Green, // Back face
