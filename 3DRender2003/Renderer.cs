@@ -11,6 +11,7 @@ namespace _DRender2003
         public Bitmap framebuffer;
         public LineRenderer lineRenderer;
         private CubeRenderer cubeRenderer;
+        private SphereRenderer sphereRenderer;
         public bool fillShapes = true;
 
         private Camera camera;
@@ -22,6 +23,8 @@ namespace _DRender2003
             lineRenderer = new LineRenderer(this);
             camera = new Camera(new Vector3(0, 0, -5), new Vector3(0, 0, 0), 1.0f);
             cubeRenderer = new CubeRenderer(this, camera);
+            sphereRenderer = new SphereRenderer(this, camera, 8, 8);
+
         }
 
         // Public property to access the camera
@@ -59,9 +62,12 @@ namespace _DRender2003
             {
                 g.Clear(Color.Black);
 
-                cubeRenderer.ClearDepthBuffer();
+                cubeRenderer.ClearBackDepthBuffer();
 
-                // Call the method to render the cube
+                // Render the sphere
+                RenderSphere(g);
+
+                //The method to render the cube
                 RenderCube(g);
             }
         }
@@ -82,6 +88,14 @@ namespace _DRender2003
 
             // Pass an array of colors to DrawCube
             cubeRenderer.DrawShape(g, cubeCenter, 100, cubeColors, fillShapes);
+        }
+
+        public void RenderSphere(Graphics g)
+        {
+            Vector3 sphereCenter = new Vector3(120, 160, 0); // Define center of the sphere
+            Color sphereColor = Color.White; // Color for the sphere
+
+            sphereRenderer.DrawShape(g, sphereCenter, 100, new Color[] { sphereColor }, fillShapes); // Draw sphere
         }
     }
 }

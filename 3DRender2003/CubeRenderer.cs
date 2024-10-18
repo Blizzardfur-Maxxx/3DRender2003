@@ -11,7 +11,6 @@ namespace _DRender2003
         {
             // Initialize cube entity at a specific position and no rotation
             cubeEntity = new Entity(new Vector3(120, 160, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
-            depthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
         }
 
         public override void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes)
@@ -84,25 +83,15 @@ namespace _DRender2003
                 new Vector3(-size / 2, -size / 2, size / 2), // Back bottom left
                 new Vector3(size / 2, -size / 2, size / 2), // Back bottom right
                 new Vector3(size / 2, size / 2, size / 2), // Back top right
-                new Vector3(-size / 2, size / 2, size / 2)  // Back top left
+                new Vector3(-size / 2, size / 2, size / 2) // Back top left
             };
         }
 
         private void DrawFace(Graphics g, Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, Color color)
         {
-            // Create points for the face
-            Point[] points = new Point[] {
-                new Point((int)v1.X, (int)v1.Y),
-                new Point((int)v2.X, (int)v2.Y),
-                new Point((int)v3.X, (int)v3.Y),
-                new Point((int)v4.X, (int)v4.Y),
-            };
-
-            // Fill the polygon
-            using (Brush brush = new SolidBrush(color))
-            {
-                g.FillPolygon(brush, points);
-            }
+            // Use the depth buffer to check and update the depth before drawing each face
+            float depth = (v1.Z + v2.Z + v3.Z + v4.Z) / 4f; // Average depth of the face
+            DrawFaceWithDepth(g, v1, v2, v3, v4, color); // Use depth test
         }
     }
 }

@@ -6,40 +6,50 @@ namespace _DRender2003
     {
         protected Renderer renderer;
         protected Camera camera;
-        protected float[,] depthBuffer;
+        protected float[,] frontDepthBuffer;
+        protected float[,] backDepthBuffer;
 
         public ShapeRenderer(Renderer renderer, Camera camera)
         {
             this.renderer = renderer;
             this.camera = camera;
 
-            // Initialize depth buffer
-            depthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
+            // Initialize two depth buffers (front and back)
+            frontDepthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
+            backDepthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
         }
 
-        // Method to clear the depth buffer before rendering each frame
-        public void ClearDepthBuffer()
+        // Method to clear the back depth buffer before rendering each frame
+        public void ClearBackDepthBuffer()
         {
             for (int x = 0; x < Renderer.SCREEN_WIDTH; x++)
             {
                 for (int y = 0; y < Renderer.SCREEN_HEIGHT; y++)
                 {
-                    depthBuffer[x, y] = float.MaxValue;
+                    backDepthBuffer[x, y] = float.MaxValue;
                 }
             }
         }
- 
+
+        // Swap front and back depth buffers after rendering
+        public void SwapDepthBuffers()
+        {
+            float[,] temp = frontDepthBuffer;
+            frontDepthBuffer = backDepthBuffer;
+            backDepthBuffer = temp;
+        }
+
         public abstract void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes);
 
-        // Method for drawing a pixel with depth checking
+        // Method for drawing a pixel with depth checking using the back depth buffer
         protected void DrawPixelWithDepth(Graphics g, int x, int y, float depth, Color color)
         {
             if (x >= 0 && x < Renderer.SCREEN_WIDTH && y >= 0 && y < Renderer.SCREEN_HEIGHT)
             {
-                
-                if (depth < depthBuffer[x, y])
+                // Use the back depth buffer for depth comparison
+                if (depth < backDepthBuffer[x, y])
                 {
-                    depthBuffer[x, y] = depth;
+                    backDepthBuffer[x, y] = depth;
                     g.FillRectangle(new SolidBrush(color), x, y, 1, 1);
                 }
             }
@@ -51,7 +61,6 @@ namespace _DRender2003
             Vector3[] projectedVertices = new Vector3[vertices.Length];
             for (int i = 0; i < vertices.Length; i++)
             {
-
                 projectedVertices[i] = camera.Project(vertices[i]);
             }
             return projectedVertices;
@@ -64,7 +73,6 @@ namespace _DRender2003
             int y1 = (int)p1.Y;
             int x2 = (int)p2.X;
             int y2 = (int)p2.Y;
-
 
             renderer.lineRenderer.DrawLine(g, x1, y1, x2, y2, color);
         }
