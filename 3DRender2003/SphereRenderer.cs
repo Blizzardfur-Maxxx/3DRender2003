@@ -14,7 +14,7 @@ namespace _DRender2003
             : base(renderer, camera)
         {
             // Initialize the sphere entity at a specific position and no rotation
-            sphereEntity = new Entity(new Vector3(120, 160, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+            sphereEntity = new Entity(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
             depthBuffer = new float[Renderer.SCREEN_WIDTH, Renderer.SCREEN_HEIGHT];
             latitudeSegments = latSegments;
             longitudeSegments = lonSegments;

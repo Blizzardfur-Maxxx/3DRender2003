@@ -10,7 +10,7 @@ namespace _DRender2003
             : base(renderer, camera)
         {
             // Initialize pyramid entity at a specific position and no rotation
-            pyramidEntity = new Entity(new Vector3(120, 160, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
+            pyramidEntity = new Entity(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
         }
 
         public override void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes)
