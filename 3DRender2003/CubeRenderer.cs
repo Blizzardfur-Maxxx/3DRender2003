@@ -13,13 +13,14 @@ namespace _DRender2003
             cubeEntity = new Entity(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
         }
 
-        public override void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes)
+        public override void DrawShape(Graphics g, Vector3 center, Vector3 size, Color[] colors, bool fillShapes)
         {
-            // Rotate the cube by a small amount (e.g., 1 degree) around the Y axis
+            // Update the scale of the cube entity based on the passed size
             cubeEntity.Rotate(new Vector3(0, 1, 0)); // Adjust this value for faster/slower rotation
+            cubeEntity.SetScale(size);
 
-            // Apply rotation to vertices, centered around the entity's position
-            Vector3[] vertices = GetCubeVertices(size); // Get vertices relative to center
+            
+            Vector3[] vertices = GetCubeVertices(cubeEntity.Scale);
             for (int i = 0; i < vertices.Length; i++)
             {
                 // First apply the rotation, then translate to the cube's position
@@ -32,7 +33,7 @@ namespace _DRender2003
             }
             else
             {
-                DrawCubeWireframe(g, vertices, Color.Red); // Use first color for wireframe
+                DrawCubeWireframe(g, vertices, colors[0]);
             }
         }
 
@@ -72,18 +73,18 @@ namespace _DRender2003
             DrawFace(g, projectedVertices[0], projectedVertices[4], projectedVertices[5], projectedVertices[1], colors[5]); // Bottom
         }
 
-        private Vector3[] GetCubeVertices(float size)
+        private Vector3[] GetCubeVertices(Vector3 size)
         {
-            // Define the vertices centered around (0, 0, 0)
+            // Define the vertices centered around (0, 0, 0) with scaling
             return new Vector3[] {
-                new Vector3(-size / 2, -size / 2, -size / 2), // Front bottom left
-                new Vector3(size / 2, -size / 2, -size / 2), // Front bottom right
-                new Vector3(size / 2, size / 2, -size / 2), // Front top right
-                new Vector3(-size / 2, size / 2, -size / 2), // Front top left
-                new Vector3(-size / 2, -size / 2, size / 2), // Back bottom left
-                new Vector3(size / 2, -size / 2, size / 2), // Back bottom right
-                new Vector3(size / 2, size / 2, size / 2), // Back top right
-                new Vector3(-size / 2, size / 2, size / 2) // Back top left
+                new Vector3(-size.X / 2, -size.Y / 2, -size.Z / 2), // Front bottom left
+                new Vector3(size.X / 2, -size.Y / 2, -size.Z / 2), // Front bottom right
+                new Vector3(size.X / 2, size.Y / 2, -size.Z / 2), // Front top right
+                new Vector3(-size.X / 2, size.Y / 2, -size.Z / 2), // Front top left
+                new Vector3(-size.X / 2, -size.Y / 2, size.Z / 2), // Back bottom left
+                new Vector3(size.X / 2, -size.Y / 2, size.Z / 2), // Back bottom right
+                new Vector3(size.X / 2, size.Y / 2, size.Z / 2), // Back top right
+                new Vector3(-size.X / 2, size.Y / 2, size.Z / 2) // Back top left
             };
         }
 

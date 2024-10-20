@@ -43,9 +43,14 @@ namespace _DRender2003
             Rotation += rotationDelta;
         }
 
-        public void ScaleEntity(Vector3 scaleDelta)
+        public void SetRotate(Vector3 scaleDelta)
         {
             Scale += scaleDelta;
+        }
+
+        public void SetScale(Vector3 newScale)
+        {
+            Scale = newScale;
         }
 
         public Vector3 ApplyRotation(Vector3 vertex)

@@ -13,16 +13,18 @@ namespace _DRender2003
             pyramidEntity = new Entity(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1, 1, 1));
         }
 
-        public override void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes)
+        public override void DrawShape(Graphics g, Vector3 center, Vector3 size, Color[] colors, bool fillShapes)
         {
+            // Set the pyramid size directly
+            pyramidEntity.SetScale(size); // Set the size for the pyramid
+
             // Rotate the pyramid by a small amount (e.g., 1 degree) around the Y axis
             pyramidEntity.Rotate(new Vector3(0, 1, 0)); // Adjust this value for faster/slower rotation
 
             // Apply rotation to vertices, centered around the entity's position
-            Vector3[] vertices = GetPyramidVertices(size); 
+            Vector3[] vertices = GetPyramidVertices(pyramidEntity.Scale.X);
             for (int i = 0; i < vertices.Length; i++)
             {
-
                 vertices[i] = pyramidEntity.ApplyRotation(vertices[i]) + pyramidEntity.Position;
             }
 
@@ -32,7 +34,7 @@ namespace _DRender2003
             }
             else
             {
-                DrawPyramidWireframe(g, vertices, Color.Red); // Use first color for wireframe
+                DrawPyramidWireframe(g, vertices, Color.Red);
             }
         }
 
@@ -43,16 +45,17 @@ namespace _DRender2003
 
             // Draw the edges of the pyramid
             DrawLine(g, projectedVertices[0], projectedVertices[1], color);
-            DrawLine(g, projectedVertices[1], projectedVertices[2], color); 
+            DrawLine(g, projectedVertices[1], projectedVertices[2], color);
             DrawLine(g, projectedVertices[2], projectedVertices[3], color);
-            DrawLine(g, projectedVertices[3], projectedVertices[0], color); 
+            DrawLine(g, projectedVertices[3], projectedVertices[0], color);
 
             // Draw the sides of the pyramid
-            DrawLine(g, projectedVertices[0], projectedVertices[4], color); 
-            DrawLine(g, projectedVertices[1], projectedVertices[4], color); 
-            DrawLine(g, projectedVertices[2], projectedVertices[4], color); 
-            DrawLine(g, projectedVertices[3], projectedVertices[4], color); 
+            DrawLine(g, projectedVertices[0], projectedVertices[4], color);
+            DrawLine(g, projectedVertices[1], projectedVertices[4], color);
+            DrawLine(g, projectedVertices[2], projectedVertices[4], color);
+            DrawLine(g, projectedVertices[3], projectedVertices[4], color);
         }
+
         private void DrawFilledPyramid(Graphics g, Vector3[] vertices, Color[] colors)
         {
             // Apply perspective projection
@@ -68,16 +71,15 @@ namespace _DRender2003
             DrawFaceWithDepth(g, projectedVertices[0], projectedVertices[1], projectedVertices[2], projectedVertices[3], colors[4]); // Base face
         }
 
-
         private Vector3[] GetPyramidVertices(float size)
         {
             // Define the vertices centered around (0, 0, 0)
             return new Vector3[] {
-            new Vector3(-size / 2, 0, -size / 2), // Base front left
-            new Vector3(size / 2, 0, -size / 2), // Base front right
-            new Vector3(size / 2, 0, size / 2), // Base back right
-            new Vector3(-size / 2, 0, size / 2), // Base back left
-            new Vector3(0, -size, 0)
+                new Vector3(-size / 2, 0, -size / 2), // Base front left
+                new Vector3(size / 2, 0, -size / 2), // Base front right
+                new Vector3(size / 2, 0, size / 2), // Base back right
+                new Vector3(-size / 2, 0, size / 2), // Base back left
+                new Vector3(0, -size, 0) // Apex of the pyramid
             };
         }
     }

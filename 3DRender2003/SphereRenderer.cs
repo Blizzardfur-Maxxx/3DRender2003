@@ -20,16 +20,17 @@ namespace _DRender2003
             longitudeSegments = lonSegments;
         }
 
-        public override void DrawShape(Graphics g, Vector3 center, float radius, Color[] colors, bool fillShapes)
+        public override void DrawShape(Graphics g, Vector3 center, Vector3 radius, Color[] colors, bool fillShapes)
         {
             // Clear the depth buffer before rendering each shape
             ClearDepthBuffer();
 
             // Rotate the sphere slightly around the Y axis
             sphereEntity.Rotate(new Vector3(0, 1, 0)); // Adjust for faster/slower rotation
+            sphereEntity.SetScale(radius); // Apply scaling
 
             // Generate vertices for the sphere
-            List<Vector3> vertices = GetSphereVertices(radius);
+            List<Vector3> vertices = GetSphereVertices(radius); // Directly use the radius
 
             // Apply rotation and translation to the sphere's position
             for (int i = 0; i < vertices.Count; i++)
@@ -47,7 +48,7 @@ namespace _DRender2003
             }
         }
 
-        private List<Vector3> GetSphereVertices(float radius)
+        private List<Vector3> GetSphereVertices(Vector3 radius)
         {
             List<Vector3> vertices = new List<Vector3>();
 
@@ -63,9 +64,9 @@ namespace _DRender2003
                     float sinPhi = (float)MathHelper.Sin(phi);
                     float cosPhi = (float)MathHelper.Cos(phi);
 
-                    float x = radius * cosPhi * sinTheta;
-                    float y = radius * cosTheta;
-                    float z = radius * sinPhi * sinTheta;
+                    float x = radius.X * cosPhi * sinTheta; // Use radius.X for uniform scaling
+                    float y = radius.Y * cosTheta;           // Use radius.Y for uniform scaling
+                    float z = radius.Z * sinPhi * sinTheta; // Use radius.Z for uniform scaling
 
                     vertices.Add(new Vector3(x, y, z));
                 }

@@ -39,7 +39,8 @@ namespace _DRender2003
             backDepthBuffer = temp;
         }
 
-        public abstract void DrawShape(Graphics g, Vector3 center, float size, Color[] colors, bool fillShapes);
+        // Updated DrawShape method to accept a Vector3 for size
+        public abstract void DrawShape(Graphics g, Vector3 center, Vector3 size, Color[] colors, bool fillShapes);
 
         // Method for drawing a pixel with depth checking using the back depth buffer
         protected void DrawPixelWithDepth(Graphics g, int x, int y, float depth, Color color)

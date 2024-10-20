@@ -26,6 +26,25 @@ namespace _DRender2003
             set { z = value; }
         }
 
+        // Properties for width, height, and depth
+        public float Width
+        {
+            get { return x; }
+            set { x = value; }
+        }
+
+        public float Height
+        {
+            get { return y; }
+            set { y = value; }
+        }
+
+        public float Depth
+        {
+            get { return z; }
+            set { z = value; }
+        }
+
         // Constructor to initialize the vector
         public Vector3(float x, float y, float z)
         {
@@ -33,6 +52,14 @@ namespace _DRender2003
             this.y = y;
             this.z = z;
         }
+
+        public Vector3 Scale(float scaleFactor)
+        {
+            return new Vector3(X * scaleFactor, Y * scaleFactor, Z * scaleFactor);
+        }
+
+        // Constructor to create a size vector
+        public Vector3(float width, float height) : this(width, height, 0) { }
 
         // Vector addition
         public static Vector3 operator +(Vector3 a, Vector3 b)

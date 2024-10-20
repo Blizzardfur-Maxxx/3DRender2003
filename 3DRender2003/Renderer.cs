@@ -102,7 +102,10 @@ namespace _DRender2003
                 Color.Cyan,  // Top face
                 Color.Magenta // Bottom face
             };
-            cubeRenderer.DrawShape(g, cubeCenter, 100, cubeColors, fillShapes);
+
+            float cubeSizeValue = 100f; // Renamed from cubeSize to cubeSizeValue
+            Vector3 cubeSize = new Vector3(cubeSizeValue, cubeSizeValue, cubeSizeValue); // This should refer to Vector3
+            cubeRenderer.DrawShape(g, cubeCenter, cubeSize, cubeColors, fillShapes);
         }
 
         public void RenderPyramid(Graphics g)
@@ -118,8 +121,9 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            // Pass an array of colors to DrawCube
-            pyramidRenderer.DrawShape(g, pyramidCenter, 100, pyramidColors, fillShapes);
+            float pyramidSizeValue = 100f; // Renamed from pyramidSize to pyramidSizeValue
+            Vector3 pyramidSize = new Vector3(pyramidSizeValue, pyramidSizeValue, pyramidSizeValue); // This should refer to Vector3
+            pyramidRenderer.DrawShape(g, pyramidCenter, pyramidSize, pyramidColors, fillShapes);
         }
 
         public void RenderSphere(Graphics g)
@@ -135,7 +139,9 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            sphereRenderer.DrawShape(g, sphereCenter, 100, sphereColors, fillShapes); // Draw sphere
+            float sphereDiameterValue = 100f; // Renamed from sphereDiameter to sphereDiameterValue
+            Vector3 sphereDiameter = new Vector3(sphereDiameterValue, sphereDiameterValue, sphereDiameterValue); // This should refer to Vector3
+            sphereRenderer.DrawShape(g, sphereCenter, sphereDiameter, sphereColors, fillShapes);
         }
     }
 }
