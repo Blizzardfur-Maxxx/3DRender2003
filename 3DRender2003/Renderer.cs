@@ -121,7 +121,7 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            float pyramidSizeValue = 100f; // Renamed from pyramidSize to pyramidSizeValue
+            float pyramidSizeValue = 100f; 
             Vector3 pyramidSize = new Vector3(pyramidSizeValue, pyramidSizeValue, pyramidSizeValue); // This should refer to Vector3
             pyramidRenderer.DrawShape(g, pyramidCenter, pyramidSize, pyramidColors, fillShapes);
         }
@@ -139,7 +139,7 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            float sphereDiameterValue = 100f; // Renamed from sphereDiameter to sphereDiameterValue
+            float sphereDiameterValue = 100f;e
             Vector3 sphereDiameter = new Vector3(sphereDiameterValue, sphereDiameterValue, sphereDiameterValue); // This should refer to Vector3
             sphereRenderer.DrawShape(g, sphereCenter, sphereDiameter, sphereColors, fillShapes);
         }
