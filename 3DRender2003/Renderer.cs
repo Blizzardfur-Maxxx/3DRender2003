@@ -92,7 +92,7 @@ namespace _DRender2003
         // Method to render the cube
         public void RenderCube(Graphics g)
         {
-            Vector3 cubeCenter = new Vector3(120, 160, 0);
+            Vector3 cubeCenter = new Vector3(0, 0, 0);
             Color[] cubeColors = new Color[] 
             {
                 Color.Red,   // Front face
@@ -103,14 +103,14 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            float cubeSizeValue = 100f; // Renamed from cubeSize to cubeSizeValue
-            Vector3 cubeSize = new Vector3(cubeSizeValue, cubeSizeValue, cubeSizeValue); // This should refer to Vector3
+            float cubeSizeValue = 100f; 
+            Vector3 cubeSize = new Vector3(cubeSizeValue, cubeSizeValue, cubeSizeValue); 
             cubeRenderer.DrawShape(g, cubeCenter, cubeSize, cubeColors, fillShapes);
         }
 
         public void RenderPyramid(Graphics g)
         {
-            Vector3 pyramidCenter = new Vector3(120, 160, 0);
+            Vector3 pyramidCenter = new Vector3(0, 0, 0);
             Color[] pyramidColors = new Color[] 
             {
                 Color.Red,   // Front face
@@ -122,13 +122,13 @@ namespace _DRender2003
             };
 
             float pyramidSizeValue = 100f; 
-            Vector3 pyramidSize = new Vector3(pyramidSizeValue, pyramidSizeValue, pyramidSizeValue); // This should refer to Vector3
+            Vector3 pyramidSize = new Vector3(pyramidSizeValue, pyramidSizeValue, pyramidSizeValue); 
             pyramidRenderer.DrawShape(g, pyramidCenter, pyramidSize, pyramidColors, fillShapes);
         }
 
         public void RenderSphere(Graphics g)
         {
-            Vector3 sphereCenter = new Vector3(120, 160, 0); // Define center of the sphere
+            Vector3 sphereCenter = new Vector3(0, 0, 0); // Define center of the sphere
             Color[] sphereColors = new Color[] 
             {
                 Color.Red,   // Front face
@@ -139,8 +139,8 @@ namespace _DRender2003
                 Color.Magenta // Bottom face
             };
 
-            float sphereDiameterValue = 100f;e
-            Vector3 sphereDiameter = new Vector3(sphereDiameterValue, sphereDiameterValue, sphereDiameterValue); // This should refer to Vector3
+            float sphereDiameterValue = 100f; 
+            Vector3 sphereDiameter = new Vector3(sphereDiameterValue, sphereDiameterValue, sphereDiameterValue); 
             sphereRenderer.DrawShape(g, sphereCenter, sphereDiameter, sphereColors, fillShapes);
         }
     }
