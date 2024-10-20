@@ -24,13 +24,13 @@ namespace _DRender2003
 
             // Simple perspective projection logic
             float perspective = 400; // Focal length, adjust as needed
-            if (vertex.Z <= 0) vertex.Z = 1;
+            if (vertex.Z <= 0) vertex.Z = 1; // Prevent division by zero
 
             float projectedX = (vertex.X * perspective) / (perspective + vertex.Z);
-            float projectedY = (vertex.Y * perspective) / (perspective + vertex.Z);
+            float projectedY = (-vertex.Y * perspective) / (perspective + vertex.Z); // Invert Y coordinate
 
             // Return projected coordinates in screen space
-            return new Vector3(projectedX + (Renderer.SCREEN_WIDTH / 2), projectedY + (Renderer.SCREEN_HEIGHT / 2), vertex.Z);
+            return new Vector3(projectedX + (Renderer.SCREEN_WIDTH / 2), projectedY + (Renderer.SCREEN_HEIGHT / 2), vertex.Z); // Center the projection
         }
 
         public Vector3 Position

@@ -79,7 +79,7 @@ namespace _DRender2003
                 new Vector3(size / 2, 0, -size / 2), // Base front right
                 new Vector3(size / 2, 0, size / 2), // Base back right
                 new Vector3(-size / 2, 0, size / 2), // Base back left
-                new Vector3(0, -size, 0) // Apex of the pyramid
+                new Vector3(0, size, 0) // Apex of the pyramid
             };
         }
     }
